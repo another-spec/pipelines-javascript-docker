@@ -3,19 +3,23 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
- trigger:
- - main
+trigger:
+- main
 
- pool:
-   name: Self Pipelines 
+pool:
+  name: Self Pipelines 
 
- variables:
-   imageName: 'pipelines-javascript-docker'
+variables:
+  imageName: 'pipelines-javascript-docker'
 
- steps:
- - task: Docker@2
-   displayName: Build an image
-   inputs:
-     repository: $(imageName)
-     command: build
-     Dockerfile: app/Dockerfile
+steps:
+- task: DockerInstaller@0
+  inputs:
+    dockerVersion: '17.09.0-ce' # string. Required. Docker Version. Default: 17.09.0-ce.
+    releaseType: stable
+- task: Docker@2
+  displayName: Build an image
+  inputs:
+    repository: $(imageName)
+    command: build
+    Dockerfile: app/Dockerfile
