@@ -7,7 +7,7 @@
  - main
 
  pool:
-   vmImage: 'ubuntu-latest' 
+   name: Self Pipelines 
 
  variables:
    imageName: 'pipelines-javascript-docker'
